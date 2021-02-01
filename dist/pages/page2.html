@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <audio id="audio">
+        <source src="../media/audio/blank.mp3" type="audio/mpeg">
+    </audio>
+    <div id="page-ready-wrap">
+        <div id="page-ready">
+            <div id="audio-play-btn"></div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-sm-6 gradient-blue-bg-1 text-white all-height">
+                <div id="page-title-2-wrap" class="page-2-title">
+                    <div id="page-title-2">
+                        <h1 class="page-title text-bold"></h1>
+                        <h2 class="page-subtitle"></h2>
+                    </div>
+                </div>
+                <div id="page-text-content" class="page-2-text-content">
+                    <p class="mb-1">A description, maybe several lines.</p>
+                    <p class="mb-1"><i>Click below to watch the video:</i></p>
+                </div>
+                <div id="page-content-bottom" class="page-2-content-bottom">
+                    <p><i>Duration: <span id="page-video-duration">x</span> minutes</i></p>
+                    <span id="go-to-video-loading" class="course-btn gray-btn float-end">Loading Video</span>
+                    <span id="go-to-video" class="show-page course-btn green-btn d-none" data-page="videoPage">Go To Video</span>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 gradient-blue-bg-2 overflow-hidden position-relative all-height">
+                <img class="backgroundelement-1" src="../img/backgroundelement.png">
+                <div class="content-z-index-5">
+                    <div class="d-md-block d-sm-block d-inline pt-4 pb-3 ps-3 pe-3 text-center">
+                        <div id="bookmark-1-img" class="page-2-bookmark-img">
+                            <img class="img-fluid mx-auto d-table" style="max-width: 180px;" src="../img/img.png">
+                        </div>
+                    </div>
+                    <div class="page-2-bookmark-text d-md-block d-sm-block d-inline text-blue p-2">
+                        <div class="content-z-index-5">
+                            <p><strong>Viewing Notes:</strong></p>
+                            <p>This video includes audio. Headphones or computer speakers are required.</p>
+                            <p><i>To Pause the video:</i></p>
+                            <p>
+                                Click anywhere on the video to pause.
+                                <br>
+                                Click again the resume.
+                            </p>
+                            <p>
+                                <i>To Bookmark your progress:</i>
+                                <br>
+                                <img class="float-end small-bookmark" src="../img/bookmark_1.png">Click the BOOKMARK ICON to save and close the video.
+                                <br><br>
+                                Doing so allows you to resume the video from that position at a later time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/gsap.min.js"></script>
+    <script src="../js/page.js"></script>
+    <script src="../js/custom-code.js"></script>
+</body>
+</html>

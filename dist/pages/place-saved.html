@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <audio id="audio">
+        <source src="../media/audio/blank.mp3" type="audio/mpeg">
+    </audio>
+    <div id="page-ready-wrap">
+        <div id="page-ready">
+            <div id="audio-play-btn"></div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 gradient-blue-bg-1 text-white height-100">
+                <div id="page-title-2-wrap">
+                    <div id="page-title-2" class="your-place-title">
+                        <h1>&nbsp;</h1>
+                        <h2 class="page-title-text-min-width">Your place has been saved.</h2>
+                        <img id="page-title-img" src="../img/bookmark_1.png">
+                    </div>
+                </div>
+                <div id="page-content-bottom" class="your-place-content">
+                    <div id="place-saved-text-content">
+                        <p><i>User <b>Continue Video</b> to return to the video.</i></p>
+                        <p><i>Select <b>Save and Close</b> to exit the course.</i></p>
+                        <div id="continue-save">
+                            <span id="continue-video" data-page="goToVideoPage" class="show-page course-btn blue-btn">&nbsp;&nbsp;&nbsp;Continue Video&nbsp;&nbsp;&nbsp;</span>
+                            <span id="save-video" class="close-course course-btn green-btn">&nbsp;&nbsp;&nbsp;Save and Close&nbsp;&nbsp;&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-none d-sm-block d-sm-none d-md-block gradient-blue-bg-2 overflow-hidden position-relative height-100">
+                <img class="backgroundelement-2" src="../img/backgroundelement.png">
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/gsap.min.js"></script>
+    <script src="../js/page.js"></script>
+    <script src="../js/custom-code.js"></script>
+</body>
+</html>

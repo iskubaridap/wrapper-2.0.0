@@ -1,0 +1,88 @@
+{
+    "company": "",
+    "companyLogo": "logo.svg",
+    "courseName": "VideoBookMark Conversion Demo 2",
+    "courseGated": false,
+    "retrieveNumOfAttempt": false,
+    "retrieveScore": false,
+    "shuffleAnswer": false,
+    "setSCORMcompleteAtTheLastPage": true,
+    "passingGrade": 80,
+    "maxScore": 100,
+    "lastUpdated": "November 22, 2019",
+    "videoApp": {
+        "vb_BookmarkTime": "{\"countdown_10s.mp4\":0}",
+        "vb_JumpToBookmarkSlide": false,
+        "vb_PasswordNumber": 123,
+        "vb_PasswordPhrases": ["foobar"],
+        "vb_Passwords": "password",
+        "vb_SendCompletion": 0,
+        "vb_ShowPassword": true,
+        "vb_ShowVideoIntro": false,
+        "vb_ThisVideoHasBeenSeen": false,
+        "vb_VideoFail": false,
+        "vb_VideoName": "countdown_10s.mp4",
+        "vb_VideoReady": false
+    },
+    "pages": [{
+        "id": "p1",
+        "file": "page1.html",
+        "title": "Title on the first line",
+        "subtitle": "Sub-title on the second line",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "audioProgress": 0,
+        "audioPlayed": false,
+        "finish": false,
+        "type": "page"
+    },{
+        "id": "goToVideoPage",
+        "file": "page2.html",
+        "title": "Video Title",
+        "subtitle": "Subtitle",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "audioProgress": 0,
+        "audioPlayed": false,
+        "finish": false,
+        "type": "page"
+    },{
+        "id": "videoPage",
+        "file": "./VideoBookmark/index.html",
+        "title": "Course Video",
+        "subtitle": "Test Video",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "audioProgress": 0,
+        "audioPlayed": false,
+        "finish": false,
+        "type": "specialPage"
+    },{
+        "id": "continueSave",
+        "file": "place-saved.html",
+        "title": "Place Saved",
+        "subtitle": "Continue Video, Save and Close",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "audioProgress": 0,
+        "audioPlayed": false,
+        "finish": false,
+        "type": "specialPage"
+    },{
+        "id": "videoEnd",
+        "file": "content-end.html",
+        "title": "End of Content",
+        "subtitle": "End of Content",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "audioProgress": 0,
+        "audioPlayed": false,
+        "finish": false,
+        "type": "specialPage"
+    },{
+        "id": "lastPage",
+        "file": "last-page.html",
+        "title": "Last Page",
+        "subtitle": "End page for this course",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "audioProgress": 0,
+        "audioPlayed": false,
+        "finish": false,
+        "type": "page"
+    }]
+}

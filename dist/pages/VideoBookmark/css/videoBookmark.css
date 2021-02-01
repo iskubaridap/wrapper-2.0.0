@@ -1,0 +1,150 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+video {
+width: 100%    !important;
+height: auto   !important;
+}
+
+h3{
+font-family: "Open Sans";
+font-size: 18px;
+font-weight: bold;
+}
+
+h4{
+font-family: "Open Sans";
+font-size: 12px;
+font-weight: normal;
+}
+
+.my-video-dimensions{
+    width: 100vw;
+    height: 56.25vw; /* height:width ratio = 9/16 = .5625  */
+    background: pink;
+    max-height: 100vh;
+    max-width: 177.78vh; /* 16/9 = 1.778 */
+    margin: auto;
+    position: absolute;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+}
+#tracker{
+  position:absolute;
+  visibility: hidden;
+  width:0px;
+  height:30px;
+  border-left: solid 3px white;
+  left:10px;
+}
+#my-playbar{
+position: absolute;
+height: 10px;
+width: 100%;
+bottom: 0px;
+z-index: 500;
+background-color: #1E6D9C;
+transition: .25s;
+overflow:hidden;
+}
+#my-playbar:hover{
+  height: 30px;
+}
+
+#my-scrubber{
+height: 20px;
+width: 30px;
+background-color: #8db305;
+left: 0px;
+top: 0px;
+overflow: hidden;
+}
+
+.play:hover{
+  background-image: url("../img/pause.svg");
+}
+
+.pause{
+  background-image: url("../img/play.svg");
+}
+
+#round-button {
+z-index: 500;
+position: absolute;
+width: 100vw;
+height: 100vh;
+background-position: center;
+background-repeat: no-repeat;
+background-size: 100px;
+transition: all 0.3s ease;
+}
+#round-button-replay {
+display: none;
+z-index: 500;
+position: absolute;
+width: 100%;
+height: 100%;
+background-image: url("../img/replay.svg");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 100px;
+transition: all 0.3s ease;
+}
+
+.tooltip {
+position: fixed;
+bottom: 0vh;
+left: 50vw;
+display: inline-block;
+height: 0;
+width: 0;
+border-radius: 100%;
+border-left: 10px solid transparent;
+border-right: 10px solid transparent;
+border-top: 10px solid #999999;
+z-index: 999;
+}
+
+.unlocked {
+  border-top: 10px solid #DDFB77;
+  animation: shadow-pulse 1s 3;
+}
+
+.tooltip .tooltiptext {
+visibility: hidden;
+width: 100px;
+background-color: #234356;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px 10px 5px 10px;
+position: absolute;
+z-index: 999;
+bottom: 12px;
+left: 50%;
+margin-left: -60px;
+}
+
+@keyframes shadow-pulse
+{
+     0% {
+          box-shadow: 0 0 0 0px rgba(221, 251, 119, 0.8);
+     }
+     100% {
+          box-shadow: 0 0 0 35px rgba(221, 251, 119, 0);
+     }
+}
+
+/*.tooltip .tooltiptext::after {
+content: "";
+position: absolute;
+top: 100%;
+left: 50%;
+margin-left: -5px;
+border-width: 5px;
+border-style: solid;
+border-color: #234356 transparent transparent transparent;
+}*/
+
+.tooltip:hover .tooltiptext {
+visibility: visible;
+}

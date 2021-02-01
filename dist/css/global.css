@@ -1,0 +1,36 @@
+:root {
+    /* Basic Colors */
+    --gray-1: #f2f2f2;
+    --gray-2: #ececec;
+    --gray-3: #e6e6e6;
+    --gray-4: #cccccc;
+    --gray-5: #b3b3b3;
+    --gray-6: #999999;
+    --gray-7: #808080;
+    --gray-8: #666666;
+    --gray-9: #4d4d4d;
+    --gray-10: #333333;
+
+    --icon-gray: #7d7d7d;
+    --icon-gray-hover: #272b2c;
+
+    --apple-green: #8db305;
+    --blue: #0080c1;
+
+    --btn-green: #8db305;
+    --btn-blue: #026093;
+    --btn-blue-highlight: #339bda;
+    
+    --blue-text: #016191;
+    
+    --background-gradient-blue: linear-gradient(45deg, #438ac8, #7eb2db);
+    --background-gradient-blue-strong: linear-gradient(90deg, #19709c, #4296cd);
+    --background-gradient-blue-light: linear-gradient(45deg, #b1cfe5, #7db1db);
+
+    --standard-font: Arial, Helvetica, sans-serif;
+    
+    --header-footer-height: 65px;
+    --wrapper-height: 600px;
+
+    --logo-img: url('../img/logo.svg');
+}

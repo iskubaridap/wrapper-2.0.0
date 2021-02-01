@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <audio id="audio">
+        <source src="../media/audio/blank.mp3" type="audio/mpeg">
+    </audio>
+    <video id="video-bg" autoplay muted>
+        <source src="../media/video/CoverAnimation.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <div id="page-ready-wrap">
+        <div id="page-ready">
+            <div id="audio-play-btn"></div>
+        </div>
+    </div>
+    <div id="page-title-1-wrap">
+        <div id="page-title-1">
+            <div>
+                <h1 class="page-title text-bold mb-0"></h1>
+                <h2 class="page-subtitle"></h2>
+            </div>
+        </div>
+    </div>
+    <div id="logo-last-update-wrap">
+        <img id="company-logo-bottom" src="" class="company-logo">
+        <div id="last-updated-wrap" class="blue-text">
+            <i>Last Updated</i>
+            <p><strong class="last-updated"></strong></p>
+        </div>
+    </div>
+    
+    
+    <script src="../js/gsap.min.js"></script>
+    <script src="../js/page.js"></script>
+    <script src="../js/custom-code.js"></script>
+    <!-- <script>
+        let tween = gsap.to('.page-1-title', {
+            delay: 3,
+            duration: 3, 
+            display: 'block', 
+            opacity: 1, 
+            ease: "none", 
+            paused: true
+        });
+        document.getElementById('foobar').addEventListener('click', () => {
+            tween.play();
+            console.log('foobar');
+        });
+    </script> -->
+</body>
+</html>

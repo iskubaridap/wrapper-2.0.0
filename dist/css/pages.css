@@ -1,0 +1,739 @@
+b, strong {
+    font-weight: bold;
+}
+i {
+    font-style: italic;
+}
+p {
+    margin-bottom: 10px;
+    line-height: 1.2em;
+    font-size: 13px;
+}
+#page-ready-wrap {
+    display: none;
+}
+#page-ready {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: inherit;
+    background-color: rgba(0,0,0,0.25);
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+#audio-play-btn {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+
+    background-image:url('../img/play.svg');
+    background-size: 100px 100px;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+#video-bg {
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: -1;
+}
+.gradient-blue-bg-1 {
+    background-image: var(--background-gradient-blue);
+}
+.gradient-blue-bg-2 {
+    background-image: var(--background-gradient-blue-light);
+}
+.gradient-blue-bg-3 {
+    background-image: var(--background-gradient-blue-strong);
+}
+.all-height {
+    height: 100vh;
+}
+.align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-blue {
+    color: var(--blue-text);
+}
+
+
+.text-bold {
+    font-weight: bold;
+}
+#page-title-1-wrap {
+    position: absolute;
+    top: 130px;
+}
+#page-title-1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    color: var(--blue-text);
+    border-left: 6px solid var(--apple-green);
+}
+#page-title-2 {
+    display: table;
+    padding-top: 60px;
+    padding-left: 10px;
+    color: #ffffff;
+    border-left: 6px solid var(--apple-green);
+}
+#page-title-1 > *,
+#page-title-2 > * {
+    margin-bottom: 0;
+}
+#page-title-1 h2,
+#page-title-2 h2 {
+    font-size: 1.75em;
+}
+#page-title-img {
+    width: 65px;
+    height: auto;
+    border-radius: 200px;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+}
+#page-content-bottom {
+    bottom: 0;
+    width: inherit;
+}
+#page-content-bottom p {
+    margin-bottom: 5px;
+}
+#page-content-bottom-last-page {
+    bottom: 0;
+    width: inherit;
+}
+#page-content-bottom-last-page p {
+    display: table;
+    margin-bottom: 5px;
+}
+#place-saved-text-content {
+    padding-bottom: 40px;
+}
+#continue-save {
+    padding-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+}
+.green-btn {
+    background-color: var(--btn-green);
+}
+.green-btn:hover {
+    padding: 2px 11px;
+    font-weight: bold;
+    background-color: var(--btn-blue-highlight);
+    border: 2px solid #ffffff;
+}
+.blue-btn {
+    background-color: var(--btn-blue);
+}
+.blue-btn:hover {
+    padding: 2px 10px;
+    font-weight: bold;
+    background-color: var(--btn-blue-highlight);
+    border: 2px solid #ffffff;
+}
+.gray-btn {
+    background-color: var(--gray-6);
+}
+.course-btn {
+    padding: 3px 15px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    border-radius: 50px;
+    text-align: center;
+    min-width: 130px;
+    display: inline-block;
+}
+.block-btn {
+    display: block;
+}
+#last-updated-wrap {
+    color: var(--blue-text);
+}
+#last-updated-wrap i {
+    font-style: italic;
+}
+.company-logo {
+    width: 130px;
+    height: auto;
+}
+.small-bookmark {
+    width: 40px;
+    height: auto;
+    position: relative;
+    top: -10px;
+}
+.backgroundelement-1,
+.backgroundelement-2 {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.2;
+}
+.backgroundelement-1 {
+    top: -284px;
+    right: -412px;
+    width: 305%;
+    height: auto;
+    transform:             rotate( -112deg );
+        -moz-transform:    rotate( -112deg );
+        -ms-transform:     rotate( -112deg );
+        -o-transform:      rotate( -112deg );
+        -webkit-transform: rotate( -112deg );
+}
+.backgroundelement-2 {
+    bottom: -284px;
+    right: -281px;
+}
+.content-z-index-5 {
+    position: relative;
+    z-index: 5;
+}
+.height-100 {
+    height: 100vh;
+}
+#content-ended-wrap {
+    max-width: 572px;
+}
+
+
+/* X-Small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    #page-title-1-wrap {
+        padding-right: 20px;
+        left: 20px;
+    }
+    #page-title-2-wrap {
+        position: relative;
+        left: 0;
+    }
+    .page-title-text-min-width {
+        width: auto;
+    }
+    #page-title-img {
+        position: absolute;
+        right: 5px;
+        top: 25px;
+        width: 40px;
+    }
+    #page-text-content {
+        padding-right: 60px;
+        position: relative;
+        top: 40px;
+        left: 40px;
+    }
+    #logo-last-update-wrap {
+        position: absolute;
+        bottom: 20px;
+        text-align: center;
+        width: 100%;
+    }
+    #last-updated-wrap {
+        padding-top: 10px;
+        position: static;
+        bottom: auto;
+        right: auto;
+        text-align: center;
+    }
+    #company-logo-bottom {
+        margin-left: auto;
+        margin-right: auto;
+        position: static;
+        bottom: auto;
+        left: auto;
+    }
+    #continue-save .course-btn {
+        display: block;
+    }
+    #continue-video {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+    #go-to-video-loading,
+    #go-to-video {
+        position: relative;
+        top: 20px
+    }
+    #page-text-content {
+        padding-right: unset;
+        left: 0;
+    }
+    #page-content-bottom {
+        margin-top: 50px;
+        padding-left: 10px;
+        padding-right: 25px;
+        padding-bottom: 50px;
+        text-align: center;
+        position: static;
+    }
+    #page-content-bottom-last-page {
+        margin-top: unset;
+        padding-left: unset;
+        padding-right: unset;
+        padding-bottom: 50px;
+        text-align: left;
+        position: absolute;
+        left: 0;
+    }
+    #page-content-bottom-last-page .block-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: table;
+    }
+    #go-to-video {
+        float: none;
+    }
+    #select-certify-text {
+        margin-left: 10px;
+    }
+    .text-end .course-btn {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: table;
+    }
+    .text-end #replay-video {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    [class*="col-"].all-height {
+        height: auto;
+    }
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    #page-title-1-wrap {
+        padding-right: 20px;
+        left: 20px;
+    }
+    #page-title-2-wrap {
+        position: relative;
+        left: 0;
+    }
+    .page-title-text-min-width {
+        width: auto;
+    }
+    #page-title-img {
+        position: absolute;
+        right: 95px;
+        top: 75px;
+    }
+    #page-text-content {
+        position: relative;
+        top: 40px;
+        left: 40px;
+        padding-right: 60px;
+        display: table;
+    }
+    #logo-last-update-wrap {
+        position: static;
+        text-align: inherit;
+    }
+    #last-updated-wrap {
+        position: absolute;
+        bottom: 35px;
+        right: 40px;
+        text-align: right;
+    }
+    #company-logo-bottom {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+    }
+    #continue-save .course-btn {
+        display: inline-block;
+    }
+    #continue-video {
+        margin-right: 20px;
+    }
+    #go-to-video-loading,
+    #go-to-video {
+        position: relative;
+        top: -30px
+    }
+    #page-content-bottom {
+        margin-top: unset;
+        padding-left: 10px;
+        padding-right: 15px;
+        padding-bottom: 40px;
+        position: absolute;
+        left: 0;
+    }
+    #page-content-bottom-last-page {
+        margin-top: unset;
+        padding-left: 10px;
+        padding-right: 15px;
+        padding-bottom: 40px;
+        position: absolute;
+        left: 0;
+    }
+    #page-content-bottom-last-page .block-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: table;
+    }
+    #go-to-video {
+        float: right;
+    }
+    #select-certify-text {
+        margin-left: 40px;
+    }
+    .text-end .course-btn {
+        display: inline-block;
+    }
+    .text-end #replay-video {
+        margin-right: 20px;
+    }
+    [class*="col-"].all-height {
+        height: auto;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #page-title-1-wrap {
+        padding-right: 0;
+        left: 80px;
+    }
+    #page-title-2-wrap {
+        position: relative;
+        left: 80px;
+    }
+    .page-title-text-min-width {
+        width: 300px;
+    }
+    #page-title-img {
+        position: absolute;
+        right: 120px;
+        top: 75px;
+    }
+    #page-text-content {
+        position: relative;
+        top: 40px;
+        left: 120px;
+    }
+    #logo-last-update-wrap {
+        position: static;
+        text-align: inherit;
+    }
+    #last-updated-wrap {
+        position: absolute;
+        bottom: 35px;
+        right: 40px;
+        text-align: right;
+    }
+    #company-logo-bottom {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+    }
+    #page-text-content {
+        padding-right: 60px;
+        left: 120px;
+    }
+    #page-content-bottom {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: unset;
+        position: absolute;
+    }
+    #page-content-bottom-last-page {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: 50px;
+        position: absolute;
+    }
+    #page-content-bottom-last-page .block-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    #continue-save .course-btn {
+        display: inline-block;
+    }
+    #go-to-video-loading,
+    #go-to-video {
+        position: relative;
+        top: -30px
+    }
+    #go-to-video {
+        float: right;
+    }
+    #select-certify-text {
+        margin-left: 80px;
+    }
+    .text-end .course-btn {
+        display: inline-block;
+    }
+    .text-end #replay-video {
+        margin-right: 20px;
+    }
+    [class*="col-"].all-height {
+        height: 100vh;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    #page-title-1-wrap {
+        left: 80px;
+        padding-right: 0;
+    }
+    #page-title-2-wrap {
+        position: relative;
+        left: 80px;
+    }
+    .page-title-text-min-width {
+        width: auto;
+    }
+    #page-title-img {
+        position: absolute;
+        right: 190px;
+        top: 75px;
+    }
+    #page-text-content {
+        position: relative;
+        top: 40px;
+        left: 120px;
+    }
+    #logo-last-update-wrap {
+        position: static;
+        text-align: inherit;
+    }
+    #last-updated-wrap {
+        position: absolute;
+        bottom: 35px;
+        right: 40px;
+    }
+    #company-logo-bottom {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+        text-align: right;
+    }
+    #page-text-content {
+        padding-right: 60px;
+        left: 110px;
+    }
+    #page-content-bottom {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: unset;
+        position: absolute;
+    }
+    #page-content-bottomj-last-page {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: 50px;
+        position: absolute;
+    }
+    #page-content-bottom-last-page .block-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    #continue-save .course-btn {
+        display: inline-block;
+    }
+    #go-to-video-loading,
+    #go-to-video {
+        position: relative;
+        top: -30px
+    }
+    #go-to-video {
+        float: right;
+    }
+    #select-certify-text {
+        margin-left: 70px;
+    }
+    .text-end .course-btn {
+        display: inline-block;
+    }
+    .text-end #replay-video {
+        margin-right: 20px;
+    }
+    [class*="col-"].all-height {
+        height: 100vh;
+    }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    #page-title-1-wrap {
+        padding-right: 0;
+        left: 80px;
+    }
+    #page-title-2-wrap {
+        position: relative;
+        left: 80px;
+    }
+    .page-title-text-min-width {
+        width: auto;
+    }
+    #page-title-img {
+        position: absolute;
+        right: 190px;
+        top: 75px;
+    }
+    #page-text-content {
+        position: relative;
+        top: 40px;
+        left: 120px;
+    }
+    #logo-last-update-wrap {
+        position: static;
+        text-align: inherit;
+    }
+    #last-updated-wrap {
+        position: absolute;
+        bottom: 35px;
+        right: 40px;
+        text-align: right;
+    }
+    #company-logo-bottom {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+    }
+    #page-text-content {
+        padding-right: 60px;
+        left: 40px;
+    }
+    #page-content-bottom {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: unset;
+        position: absolute;
+    }
+    #page-content-bottom-last-page {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: 50px;
+        position: absolute;
+    }
+    #page-content-bottom-last-page .block-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    #continue-save .course-btn {
+        display: inline-block;
+    }
+    #go-to-video-loading,
+    #go-to-video {
+        position: relative;
+        top: -30px
+    }
+    #go-to-video {
+        float: right;
+    }
+    #select-certify-text {
+        margin-left: 30px;
+    }
+    .text-end .course-btn {
+        display: inline-block;
+    }
+    .text-end #replay-video {
+        margin-right: 20px;
+    }
+    [class*="col-"].all-height {
+        height: 100vh;
+    }
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    #page-title-1-wrap {
+        padding-right: 0;
+        left: 80px;
+    }
+    #page-title-2-wrap {
+        position: relative;
+        left: 80px;
+    }
+    .page-title-text-min-width {
+        width: auto;
+    }
+    #page-title-img {
+        position: absolute;
+        right: 190px;
+        top: 75px;
+    }
+    #page-text-content {
+        position: relative;
+        top: 40px;
+        left: 120px;
+    }
+    #logo-last-update-wrap {
+        position: static;
+        text-align: inherit;
+    }
+    #last-updated-wrap {
+        position: absolute;
+        bottom: 35px;
+        right: 40px;
+        text-align: right;
+    }
+    #company-logo-bottom {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+    }
+    #page-text-content {
+        padding-right: 60px;
+        left: 40px;
+    }
+    #page-content-bottom {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: unset;
+        position: absolute;
+    }
+    #page-content-bottom-last-page {
+        margin-top: unset;
+        padding-left: 50px;
+        padding-right: 65px;
+        padding-bottom: 50px;
+        position: absolute;
+    }
+    #page-content-bottom-last-page .block-btn {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+    #continue-save .course-btn {
+        display: inline-block;
+    }
+    #go-to-video-loading,
+    #go-to-video {
+        position: relative;
+        top: -30px
+    }
+    #go-to-video {
+        float: right;
+    }
+    #select-certify-text {
+        margin-left: 30px;
+    }
+    .text-end .course-btn {
+        display: inline-block;
+    }
+    .text-end #replay-video {
+        margin-right: 20px;
+    }
+}

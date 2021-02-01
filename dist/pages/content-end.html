@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <audio id="audio">
+        <source src="../media/audio/blank.mp3" type="audio/mpeg">
+    </audio>
+    <div id="page-ready-wrap">
+        <div id="page-ready">
+            <div id="audio-play-btn"></div>
+        </div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col gradient-blue-bg-3 text-white height-100 align-center">
+                <div id="content-ended-wrap" class="content-ended-text">
+                    <p><i>The content has ended. You may replay the video or continue to the next screen.</i></p>
+                    <div class="content-ended-btn-wrap text-end mt-5">
+                        <span id="replay-video" data-page="goToVideoPage" class="show-page course-btn blue-btn">Replay</span>
+                        <span id="next-page" data-page="lastPage" class="show-page course-btn green-btn">Next</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/gsap.min.js"></script>
+    <script src="../js/page.js"></script>
+    <script src="../js/custom-code.js"></script>
+</body>
+</html>
