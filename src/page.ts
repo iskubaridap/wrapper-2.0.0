@@ -177,102 +177,14 @@ var playAnimation = () => {
 }
 var initPage = () => {
     audioPlay();
-    if(courseVideo) {
-        (<any> parent).showVideoOverlay();
-    } else {
-        (<any> parent).hideVideoOverlay();
+    if(insideOfWrapper) {
+        if(courseVideo) {
+            (<any> parent).showVideoOverlay();
+        } else {
+            (<any> parent).hideVideoOverlay();
+        }
     }
 }
-// var slideDown = (elem: HTMLElement, delay: number = 0) => {
-//     let execute = (target: HTMLElement) => {
-//         elem.classList.add('active')
-//         elem.style.height = "auto"
-        
-//         /** Get the computed height of the container. */
-//         var height = elem.clientHeight + "px"
-    
-//         /** Set the height of the content as 0px, */
-//         /** so we can trigger the slide down animation. */
-//         elem.style.height = "0px"
-    
-//         /** Do this after the 0px has applied. */
-//         /** It's like a delay or something. MAGIC! */
-//         setTimeout(() => {
-//             elem.style.height = height
-//         }, 0)
-//     }
-//     if(elem) {
-//          setTimeout(() => execute(elem), delay);
-//     }
-// }
-// var slideUp = (elem: HTMLElement, delay: number = 0) => {
-//     let execute = (target: HTMLElement) => {
-//         /** Set the height as 0px to trigger the slide up animation. */
-//         elem.style.height = "0px"
-            
-//         /** Remove the `active` class when the animation ends. */
-//         elem.addEventListener('transitionend', () => {
-//             elem.classList.remove('active')
-//         }, {once: true})
-//     }
-//     if(elem) {
-//          setTimeout(() => execute(elem), delay);
-//     }
-// }
-// var fadeOut = (elem: HTMLElement, delay: number = 0, duration: number = 600, calllback?: Function) => {
-//     let execute = (target: HTMLElement) => {
-//         let element = (<any> elem);
-//         let elemStyle = getComputedStyle(elem);
-//         element.style.opacity = 1;
-//         let last = +new Date();
-//         let tick = () => {
-//             let time = (<any> new Date());
-//             element.style.opacity = - element.style.opacity + (time - last) / duration;
-//             last = +new Date();
-//             if (+element.style.opacity <= 1) {
-//                 (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-//             } else {
-//                 element.style.display = 'none'
-//                 if(calllback) {
-//                     calllback();
-//                 }
-//             }
-//         };
-//         tick();
-//     }
-//     if(elem) {
-//         setTimeout(() => execute(elem), delay);
-//     }
-// }
-// var fadeIn = (elem: HTMLElement, delay: number = 0, duration: number = 600, calllback?: Function) => {
-//     let execute = (target: HTMLElement) => {
-//         let element = (<any> target);
-//         let elemStyle = getComputedStyle(target);
-//         if(elemStyle.display == 'none') {
-//             element.style.display = 'block';
-//         } else {
-//             element.style.display = '';
-//         }
-//         element.style.opacity = 0;
-//         let last = +new Date();
-//         let tick = () => {
-//             let time = (<any> new Date());
-//             element.style.opacity = + element.style.opacity + (time - last) / duration;
-//             last = +new Date();
-//             if (+element.style.opacity < 1) {
-//                 (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-//             } else {
-//                 if(calllback) {
-//                     calllback();
-//                 }
-//             }
-//         };
-//         tick();
-//     }
-//     if(elem) {
-//         setTimeout(() => execute(elem), delay);
-//     }
-// }
 var slideUp = (elem: string, _timing: number = 0, _duration: number = 0.6, calllback?: Function) => {
     let height: number = 0;
     let execute = (target: string) => {
@@ -288,7 +200,7 @@ var slideUp = (elem: string, _timing: number = 0, _duration: number = 0.6, calll
         };
         tweenAry.push(obj);
     }
-    if(document.querySelectorAll(elem)) {
+    if(document.querySelectorAll(elem).length > 0) {
         document.querySelectorAll(elem).forEach(value => {
             let _elem = value as HTMLElement;
             _elem.setAttribute('data-height', (<any> _elem).offsetHeight);
@@ -313,7 +225,7 @@ var slideDown = (elem: string, _timing: number = 0, _duration: number = 0.6, cal
         };
         tweenAry.push(obj);
     }
-    if(document.querySelectorAll(elem)) {
+    if(document.querySelectorAll(elem).length > 0) {
         document.querySelectorAll(elem).forEach(value => {
             let _elem = value as HTMLElement;
             _elem.setAttribute('style', '');
@@ -325,7 +237,7 @@ var slideDown = (elem: string, _timing: number = 0, _duration: number = 0.6, cal
 }
 var slideToggle = (elem: string) => {
     let _duration: number = 0.6;
-    if(document.querySelectorAll(elem)) {
+    if(document.querySelectorAll(elem).length > 0) {
         document.querySelectorAll(elem).forEach(value => {
             let _elem = value as HTMLElement;
             _elem.style.overflow = 'hidden';
@@ -358,7 +270,7 @@ var fadeIn = (elem: string, _timing: number = 0, _duration: number = 0.6, calllb
         };
         tweenAry.push(obj);
     }
-    if(document.querySelectorAll(elem)) {
+    if(document.querySelectorAll(elem).length > 0) {
         document.querySelectorAll(elem).forEach(value => {
             let _elem = value as HTMLElement;
             _elem.setAttribute('style', '');
@@ -385,7 +297,7 @@ var fadeOut = (elem: string, _timing: number = 0, _duration: number = 0.6, calll
         };
         tweenAry.push(obj);
     }
-    if(document.querySelectorAll(elem)) {
+    if(document.querySelectorAll(elem).length > 0) {
         execute(elem);
     }
 }
@@ -400,9 +312,9 @@ var showVideoPassword = () => {
         }
     }
 }
-var closeCourseEvent = () => {
+var closeCourseAction = (strExitType: string) => {
     if(insideOfWrapper) {
-        (<any> parent).closeCourse();
+        (<any> parent).closeCourse(strExitType);
     }
 }
 
@@ -423,8 +335,8 @@ audio?.addEventListener("ended", function () {
     pageFinish = true;
 });
 courseVideo?.addEventListener('timeupdate', showVideoPassword);
-closeCourseBtn?.addEventListener('click', closeCourseEvent);
-saveCloseBtn?.addEventListener('click', closeCourseEvent);
+closeCourseBtn?.addEventListener('click', () => closeCourseAction('suspend'));
+saveCloseBtn?.addEventListener('click', () => closeCourseAction('suspend'));
 showPage.forEach(elem => {
     const item = elem as HTMLElement;
     const id = item.getAttribute('data-page');
@@ -437,6 +349,8 @@ if (insideOfWrapper) {
     // if this page is inside of the wrapper
 } else {
     // if this page is NOT inside of the wrapper
+    pageSet();
+    initPage();
     setPageVolume();
 }
 pageLoadAudio();

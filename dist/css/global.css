@@ -29,8 +29,10 @@
 
     --standard-font: Arial, Helvetica, sans-serif;
     
-    --header-footer-height: 65px;
-    --wrapper-height: 600px;
+    --header-footer-height: 58px;
+    --header-footer-height-wide-screen: 80px;
+    --wrapper-height: 100vh;
+    /* --wrapper-height: 600px; */
 
     --logo-img: url('../img/logo.svg');
 }

@@ -1,13 +1,15 @@
 {
     "company": "",
-    "companyLogo": "logo.svg",
+    "companyLogo": "logo.png",
     "courseName": "VideoBookMark Conversion Demo 2",
     "courseGated": false,
     "retrieveNumOfAttempt": false,
     "retrieveScore": false,
     "shuffleAnswer": false,
     "setSCORMcompleteAtTheLastPage": true,
+    "objectiveID": "0",
     "passingGrade": 80,
+    "minScore": 0,
     "maxScore": 100,
     "lastUpdated": "November 22, 2019",
     "videoApp": {

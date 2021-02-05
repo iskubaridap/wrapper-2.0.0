@@ -18,7 +18,6 @@ myReplayButton = document.getElementById("round-button-replay");
 var player = parent.GetPlayer();
 videoName = player.GetVar("vb_VideoName");
 videoSrc = "../../media/video/" + videoName;
-console.log(videoName);
 vb_BookmarkTime = JSON.parse(player.GetVar("vb_BookmarkTime"));
 passwords = player.GetVar("vb_Passwords").split(",");
 

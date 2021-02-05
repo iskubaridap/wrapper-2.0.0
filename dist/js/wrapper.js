@@ -16,6 +16,7 @@ let shuffleAnswer;
 let setSCORMcompleteAtTheLastPage;
 let passingGrade;
 let maxScore;
+let minScore;
 var pages = [];
 var spagePages = [];
 var courseVolume = 0;
@@ -46,20 +47,21 @@ let wrapperObj = {
     numOfAttempt: numOfAttempt,
     videoBookMark: ''
 };
-var initScorm = () => {
+var initScorm = (json) => {
     // keeping this "if" statement for future use
     if (SCORM && !courseStart) {
         SCORM2004_Initialize();
         startTimeStamp = new Date();
         let continueCourse = null;
-        let completionStatus = SCORM2004_CallGetValue("cmi.completion_status", true);
-        suspendData = SCORM2004_CallGetValue("cmi.suspend_data") ? JSON.parse(SCORM2004_CallGetValue("cmi.suspend_data")) : wrapperObj;
-        if (completionStatus == "unknown") {
-            SCORM2004_CallSetValue("cmi.completion_status", "incomplete");
+        let completionStatus = SCORM2004_GetStatus();
+        suspendData = SCORM2004_GetDataChunk() ? JSON.parse(SCORM2004_GetDataChunk()) : wrapperObj;
+        if (completionStatus == null) {
+            // set it to 4 (LESSON_STATUS_INCOMPLETE) rather than 6 (LESSON_STATUS_NOT_ATTEMPTED)
+            SCORM2004_SetObjectiveStatus(SCORM2004_FindObjectiveIndexFromID(json.objectiveID), 4);
         }
-        wrapperObj.student = SCORM2004_CallGetValue("cmi.learner_name");
+        wrapperObj.student = SCORM2004_GetStudentName();
         if (retrieveScore) {
-            wrapperObj.score = SCORM2004_CallGetValue("cmi.score.raw") ? SCORM2004_CallGetValue("cmi.score.raw") : 0;
+            wrapperObj.score = SCORM2004_GetScore() ? SCORM2004_GetScore() : 0;
         }
         else {
             wrapperObj.score = 0;
@@ -69,19 +71,15 @@ var initScorm = () => {
             wrapperObj.numOfAttempt = suspendData.numOfAttempt;
         }
         scaledScore = wrapperObj.score / maxScore;
-        SCORM2004_CallSetValue("cmi.score.scaled", scaledScore);
-        fetch('./js/settings.json')
-            .then(response => response.json())
-            .then(json => {
-            const courseName = document.getElementById('course-name-txt');
-            courseName.innerText = json.courseName;
-            if (parseInt(SCORM2004_GetBookmark()) > 0) {
-                loadResumeRestart(json);
-            }
-            else {
-                loadPages(json);
-            }
-        });
+        SCORM2004_SetScore(0, json.maxScore, json.minScore);
+        const courseName = document.getElementById('course-name-txt');
+        courseName.innerText = json.courseName;
+        if (parseInt(SCORM2004_GetBookmark()) > 0) {
+            loadResumeRestart(json);
+        }
+        else {
+            loadPages(json);
+        }
         courseStart = true;
     }
 };
@@ -93,7 +91,10 @@ var loadResumeRestart = (json) => {
     // the user choose to resume the course
     document.getElementById('resume-btn').addEventListener('click', () => {
         const page = parseInt(SCORM2004_GetBookmark());
-        if (page >= 1) {
+        if (page == (json.pages.length - 1)) {
+            wrapperObj.currentPage = (json.pages.length - 1);
+        }
+        else if (page >= 1 && page < json.pages.length) {
             wrapperObj.currentPage = 1;
         }
         else if (page <= 0) {
@@ -139,23 +140,10 @@ var addScore = () => {
     wrapperObj.score += iframeObj.scoreValue ? parseFloat(iframeObj.scoreValue) : 0;
     wrapperObj.score = wrapperObj.score >= 99 ? 100 : wrapperObj.score;
     if (SCORM && courseStart) {
-        SCORM2004_CallSetValue("cmi.score.min", 0);
-        SCORM2004_CallSetValue("cmi.score.max", maxScore);
-        SCORM2004_CallSetValue("cmi.score.raw", wrapperObj.score);
-        scaledScore = wrapperObj.score / maxScore;
-        scaledScore = scaledScore >= 99 ? 100 : scaledScore;
-        SCORM2004_CallSetValue("cmi.score.scaled", scaledScore);
-        if (wrapperObj.score >= passingGrade) {
-            SCORM2004_CallSetValue("cmi.completion_status", "completed");
-            SCORM2004_CallSetValue("cmi.success_status", "passed");
-        }
-        else {
-            SCORM2004_CallSetValue("cmi.completion_status", "incomplete");
-            SCORM2004_CallSetValue("cmi.success_status", "failed");
-        }
+        SCORM2004_SetScore(wrapperObj.score, maxScore, minScore);
     }
 };
-var doUnload = () => {
+var doUnload = (strExitType = 'suspend') => {
     // don't call this function twice
     if (processedUnload == true) {
         return;
@@ -164,39 +152,35 @@ var doUnload = () => {
     //record the session time
     var endTimeStamp = new Date();
     var totalMilliseconds = (endTimeStamp.getTime() - startTimeStamp.getTime());
-    var scormTime = ConvertMilliSecondsIntoSCORM2004Time(totalMilliseconds);
-    SCORM2004_CallSetValue("cmi.session_time", scormTime);
+    SCORM2004_CallSetValue("cmi.exit", strExitType.toUpperCase());
+    SCORM2004_CallSetValue("adl.nav.request", "exitAll");
+    SCORM2004_SaveTime(totalMilliseconds);
     SCORM2004_CallTerminate();
 };
-var closeCourse = () => {
+var closeCourse = (strExitType = 'suspend') => {
     setSCORMcomplete();
     if (SCORM && courseStart) {
-        doUnload();
+        doUnload(strExitType);
     }
 };
 var setSCORMvalues = () => {
     if (SCORM && courseStart) {
-        SCORM2004_CallSetValue("cmi.suspend_data", JSON.stringify(wrapperObj));
+        SCORM2004_SetDataChunk(JSON.stringify(wrapperObj));
     }
 };
 var setSCORMcomplete = () => {
     if (SCORM && courseStart) {
         wrapperObj.pageProgress = (pageProgress / pages.length * 100);
-        SCORM2004_CallSetValue("cmi.suspend_data", JSON.stringify(wrapperObj));
+        setSCORMvalues();
         if (setSCORMcompleteAtTheLastPage) {
-            SCORM2004_CallSetValue("cmi.completion_status", "completed");
-            SCORM2004_CallSetValue("cmi.success_status", "passed");
+            SCORM2004_SetPassed();
         }
         else if (wrapperObj.score >= passingGrade) {
-            SCORM2004_CallSetValue("cmi.completion_status", "completed");
-            SCORM2004_CallSetValue("cmi.success_status", "passed");
+            SCORM2004_SetPassed();
         }
         else {
-            SCORM2004_CallSetValue("cmi.completion_status", "completed");
-            SCORM2004_CallSetValue("cmi.success_status", "failed");
+            SCORM2004_SetFailed();
         }
-        SCORM2004_CallSetValue("cmi.exit", "");
-        SCORM2004_CallSetValue("adl.nav.request", "exitAll");
     }
 };
 var setCMIInteractions = (settings) => {
@@ -213,6 +197,7 @@ var setCMIInteractions = (settings) => {
     // temporary disabled obj.latency = ConvertMilliSecondsIntoSCORM2004Time(new Date((new Date()).getMilliseconds()));
     obj.description = settings.description ? settings.description : "Question" + obj.num + " text";
     if (SCORM) {
+        // keeping this for now
         SCORM2004_CallSetValue(("cmi.interactions." + obj.num + ".id"), obj.id);
         SCORM2004_CallSetValue(("cmi.interactions." + obj.num + ".type"), obj.type);
         SCORM2004_CallSetValue(("cmi.interactions." + obj.num + ".objectives.0.id"), obj.objectives);
@@ -234,6 +219,7 @@ var getInteractionsCount = () => {
 };
 var setCMIInteractionsLatency = (count, response, result, time) => {
     if (SCORM) {
+        // keeping this for now
         SCORM2004_CallSetValue(("cmi.interactions." + count + ".learner_response"), response);
         SCORM2004_CallSetValue(("cmi.interactions." + count + ".result"), result);
         SCORM2004_CallSetValue(("cmi.interactions." + count + ".latency"), ConvertMilliSecondsIntoSCORM2004Time(time));
@@ -251,9 +237,6 @@ var setPageWhenGettingOut = () => {
             iframeElem.classList.remove('active');
         }
     });
-    // if(currentPageContentWindow.audioPlay) {
-    //     currentPageContentWindow.pauseAudio();
-    // }
 };
 var nextPage = () => {
     const iframePages = document.querySelectorAll('#content .page');
@@ -389,6 +372,18 @@ var enableNextBtn = () => {
 var setPage = () => {
     const iframe = document.querySelectorAll('#content .page')[wrapperObj.currentPage];
     const iframeObj = iframe.contentWindow;
+    const setVideoOverlayWrapTop = () => {
+        const videoOverlayWrapElem = document.getElementById('video-overlay-wrap');
+        const rectY = iframe.getBoundingClientRect().y;
+        const rectWidth = iframeObj.document.getElementById('my-video').getClientRects()[0].width;
+        if (rectY <= 58) {
+            videoOverlayWrapElem.style.top = `58px`;
+        }
+        else {
+            videoOverlayWrapElem.style.top = `${rectY}px`;
+        }
+        videoOverlayWrapElem.style.width = `${rectWidth}px`;
+    };
     if (SCORM && courseStart) {
         SCORM2004_SetBookmark((wrapperObj.currentPage).toString());
         setSCORMvalues();
@@ -449,6 +444,11 @@ var setPage = () => {
     if (iframeObj.setPageVolume) {
         iframeObj.setPageVolume(courseVolume);
     }
+    if (iframe.getAttribute('data-id') == 'videoPage') {
+        setVideoOverlayWrapTop();
+        window.removeEventListener('resize', setVideoOverlayWrapTop);
+        window.addEventListener('resize', setVideoOverlayWrapTop);
+    }
 };
 var GetPlayer = () => {
     let playerObj = videoObj;
@@ -476,25 +476,41 @@ var GetPlayer = () => {
                 if (property == 'vb_VideoReady' && value == true) {
                     const goToVideoPage = document.querySelector('#content .page[data-id="goToVideoPage"]');
                     const contentWindow = goToVideoPage.contentWindow.document;
+                    const videoIframe = document.querySelector('.page[data-id="videoPage"]');
+                    const videoElem = (videoIframe.contentWindow).document.getElementById('my-video');
                     contentWindow.getElementById('go-to-video-loading').classList.add('d-none');
                     contentWindow.getElementById('go-to-video').classList.remove('d-none');
+                    videoElem.addEventListener('canplay', (e) => {
+                        const duration = videoElem.duration ? videoElem.duration : 0;
+                        let durationText = '';
+                        if (duration > 60) {
+                            durationText = ((duration / 60) > 1 ? `${duration / 60} minutes ` : `${duration / 60} minute `) + (duration > 0) ? `${duration} seconds` : `${duration} second`;
+                        }
+                        else {
+                            durationText = (duration > 0) ? `${duration} seconds` : `${duration} second`;
+                        }
+                        document.querySelector('.page[data-id="goToVideoPage"]').contentWindow.document.getElementById('page-video-duration').innerText = durationText;
+                    });
                 }
                 if (property == 'vb_ThisVideoHasBeenSeen' && value == true) {
-                    showCertainPage('videoEnd');
+                    /*
+                        this make sure that the user is in the videoPage before running this
+                        "if statement" to prevent any issue when the user Resume when re-opening
+                        the course.
+                    */
+                    const iframe = document.querySelectorAll('#content .page')[wrapperObj.currentPage];
+                    if (iframe.getAttribute('data-id') == 'videoPage') {
+                        showCertainPage('videoEnd');
+                    }
                 }
                 if (property == 'vb_BookmarkTime' && value != '') {
                     wrapperObj.videoBookMark = value;
-                    if (typeof SCORM2004_CallSetValue == 'function') {
-                        SCORM2004_CallSetValue("cmi.suspend_data", JSON.stringify(wrapperObj));
-                    }
-                    setSCORMvalues();
                 }
                 if (property == 'vb_SendCompletion' && value == 1) {
                     wrapperObj.videoBookMark = playerObj.vb_BookmarkTime;
                     if (typeof SCORM2004_CallSetValue == 'function') {
-                        SCORM2004_CallSetValue("cmi.suspend_data", JSON.stringify(wrapperObj));
+                        setSCORMvalues();
                     }
-                    setSCORMvalues();
                 }
                 return true;
             }
@@ -555,12 +571,6 @@ var loadPages = (json) => {
     let pagesLoaded = 0;
     let allPagesLoaded = () => {
         const loader = document.getElementById('content-loader');
-        const videoIframe = document.querySelector('.page[data-id="videoPage"]');
-        const videoElem = (videoIframe.contentWindow).document.getElementById('my-video');
-        videoElem.addEventListener('canplay', (e) => {
-            const duration = videoElem.duration ? videoElem.duration : 0;
-            document.querySelector('.page[data-id="goToVideoPage"]').contentWindow.document.getElementById('page-video-duration').innerText = (duration).toString();
-        });
         loader === null || loader === void 0 ? void 0 : loader.classList.add('d-none');
         setResourceBalloon();
         setPage();
@@ -621,10 +631,11 @@ var loadPages = (json) => {
     setSCORMcompleteAtTheLastPage = json.setSCORMcompleteAtTheLastPage;
     passingGrade = json.passingGrade;
     maxScore = json.maxScore;
+    minScore = json.minScore;
     lastUpdated = json.lastUpdated;
     videoObj = json.videoApp;
     if (document.getElementById('course-name-txt')) {
-        document.getElementById('course-name-txt').innerHTML = `<i class="bi bi-book"></i> &nbsp;${courseName}`;
+        document.getElementById('course-name-txt').innerHTML = `${courseName}`;
     }
     if (json.pages) {
         totalPages += json.pages.length;
