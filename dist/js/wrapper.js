@@ -375,7 +375,7 @@ var setPage = () => {
     const setVideoOverlayWrapTop = () => {
         const videoOverlayWrapElem = document.getElementById('video-overlay-wrap');
         const rectY = iframe.getBoundingClientRect().y;
-        const rectWidth = iframeObj.document.getElementById('my-video').getClientRects()[0].width;
+        const rectWidth = iframeObj.document.getElementById('my-video').getClientRects()[0] !== undefined ? iframeObj.document.getElementById('my-video').getClientRects()[0].width : 0;
         if (rectY <= 58) {
             videoOverlayWrapElem.style.top = `58px`;
         }
@@ -580,6 +580,7 @@ var loadPages = (json) => {
         iframeElem.src = `./pages/${obj.file}`;
         iframeElem.setAttribute('data-type', type);
         iframeElem.setAttribute('data-id', obj.id);
+        iframeElem.setAttribute('frameBorder', '0');
         iframeElem.className = 'page';
         contentElem.appendChild(iframeElem);
         contentElem.querySelectorAll('.page')[index].addEventListener('load', (e) => {
